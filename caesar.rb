@@ -1,38 +1,11 @@
+ALPHABETS = %w{abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789}
 
-
-
-def caesar(string, integer) 
-  rotated = []
-  string.bytes.map do
-    |value| 
-    if value >=65 && value <= 90
-      if value + integer <= 90 && value + integer >= 65
-      rotated.push(value + integer)
-      else 
-        if value + integer >= 65 
-        rotated.push(64 + (integer - (90 - value)))
-        else rotated.push(91 - (integer + (value - 65)).abs)
-        end
-      end
-    elsif value >=97 && value <= 122
-      if value + integer <= 122 && value + integer >= 97
-      rotated.push(value + integer)
-      else
-        if value + integer >= 97 
-        rotated.push(96 + (integer - (122 - value)))
-        else rotated.push(123 - (integer + (value - 97)).abs)
-        end
-      end
-    end
+def caesar(string, rotate)
+  ALPHABETS.each do
+    |alphabet|
+    rotated_alphabet = alphabet[rotate % alphabet.length..] +
+    alphabet[...rotate % alphabet.length]
+    string.tr!(alphabet, rotated_alphabet)
   end
-  p rotated.map {|convert| convert.chr }
-end
-
-caesar("Bb", -5)
-#   elsif current >=65 && current <= 91
-#   end
-
-#   else puts "Not a valid string"
-#   end
-# end
-
+  puts string
+ends
