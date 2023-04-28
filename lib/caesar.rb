@@ -7,5 +7,5 @@ def caesar(string, rotate)
     alphabet[...rotate % alphabet.length]
     string.tr!(alphabet, rotated_alphabet)
   end
-  puts string
-ends
+  string
+end
